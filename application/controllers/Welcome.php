@@ -23,7 +23,7 @@ class Welcome extends CI_Controller {
         parent::__construct();
 
     }
-    public function index()
+    public function index()//this function will be called when the whole class controller has been initiated
 	{
         $data['table_header'] = $this->main->table_header();
         $data['users'] = $this->main->table_num_count('users');
@@ -48,6 +48,7 @@ class Welcome extends CI_Controller {
         $data['table_name']='users';
         $data['main_view']='table_data';
         $this->load->view('main',$data);
+
 
     }
     public function search_posts(){//it work fine and could be used in the project :)
