@@ -63,7 +63,7 @@ class Welcome extends CI_Controller {
         if($this->main->delete($id,$table_name)==true)echo 'the operation was successfull';//change it to what u desire
 
     }
-    public function delete_post($id){
+    public function delete_post($id){//a specific function for deleting a post :)
         if ($this->main->post_delete($id)){
             $this->session->set_flashdata('post_deleted','the post '.$id .' has been deleted successfully');
             $url = '/welcome/show/posts';

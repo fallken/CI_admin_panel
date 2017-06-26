@@ -30,5 +30,6 @@
                 <script>
                     CKEDITOR.replace('slide_body');
                 </script>
+								<!-- i want to make some changes in the main repo just to check what will happen next -->
 </form>
 </div>
