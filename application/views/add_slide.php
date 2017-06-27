@@ -11,10 +11,11 @@
 		<?php if (isset($_SESSION['success']))echo '<div style="margin-top: 80px;" class="btn-success">'.$_SESSION['success'].'</div>'; ?>
 		<?php if (isset($_SESSION['failure']))echo '<div style="margin-top: 80px;" class="btn-danger">'.$_SESSION['failure'].'</div>';  ?>
 		<div class="form-group" style="margin-top: 90px;">
-			<label for="title"><b>نام اسلاید</b></label>
-			<input name="slide_name" type="text" class="form-control" id="slide_name" placeholder="only english titles"
-				   required>
-			<br>
+            <label for="slide_name"><b>نوع اسلاید</b></label>
+            <select id="slide_name" name="slide_name" class="form-control" required>
+                <option value='slide'>اسلاید فرعی</option>"
+                <option value='main_image'>اسلاید اصلی</option>"
+            </select>
 			<br>
 			<div class="form-group">
                 <label for="title"><b>توضیحات اسلاید</b></label>
@@ -22,6 +23,16 @@
 										  rows="3"></textarea>
 			</div>
 			<br>
+            <label for="slide_link"><b>لینک</b></label>
+            <input name="slide_link" type="text" class="form-control" id="slide_link" placeholder="link"
+                   >
+            <br>
+            <label for="slide_type"><b>نوع لینک</b></label>
+            <select id="slide_type" name="slide_type" class="form-control" required>
+                   <option value='0'>url</option>"
+                   <option value='1'>activity</option>"
+            </select>
+            <br>
             <label for="title"><b>تصویر</b></label>
 			<input name="image" type="file" class="form-control" id="image" required>
 

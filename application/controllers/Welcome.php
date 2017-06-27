@@ -161,7 +161,10 @@ class Welcome extends CI_Controller {
 			$data['main_view']='add_slide';
 			$this->load->view('main',$data);
 		}else{
-			$data= array('var'=>$this->input->post('slide_name'),'val1'=> $this->upload_image(),'val2'=>$this->input->post('slide_body'));
+		    $slide_name = $this->input->post('slide_name');
+		    $slide_name = $slide_name.rand(5,150);
+			$data= array('var'=>$slide_name,'val1'=> $this->upload_image(),'val2'=>$this->input->post('slide_body'),
+              'link'=>$this->input->post('slide_link'),'type'=>$this->input->post('slide_type'));
 			if ($this->main->slide_add($data)){
 				$this->session->set_flashdata('success','the slide has been inserted successfully ');
 				redirect('welcome/add_slide');
