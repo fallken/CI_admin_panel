@@ -1,1 +1,1 @@
-an admin panel made by Codeigniter and main focus is on faciliating CRUD process in php
+an admin panel made by Codeigniter and main focus is on faciliating CRUD process in php this readme is after i have redited the file
