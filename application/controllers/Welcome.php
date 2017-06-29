@@ -72,6 +72,7 @@ class Welcome extends CI_Controller {
     }
     public function add_post(){//this function still needs to be tested :(
 		$post_name=$this->input->post('post_name');
+		$image_path = "../images/posts/";
 		if (!isset($post_name)){
 			$data['cat_list']=$this->main->cat_list();
             $data['main_view'] = 'add_post';
@@ -80,7 +81,7 @@ class Welcome extends CI_Controller {
             $post_name=$this->input->post('post_name');
             $post_body=$this->input->post('post_body');
             $cat_id=$this->input->post('post_cat');
-            $image = $this->upload_image();
+            $image = $this->upload_image($image_path);
             $post_data = array(
                 'title'=>$post_name,
                 'text'=>urlencode($post_body),
@@ -106,24 +107,26 @@ class Welcome extends CI_Controller {
 
 
         }}
-    public function upload_image()
+    public function upload_image($path="../images/")
     {
         //this whole system is a little tricky but i think the problem could be solved and i can analyze it and figure it out
         //man i didnt exacly know the permission system but now i have fixed it it was a permission like : sudo chmod -R 777 /opt/lampp thi
         //grants full permission and the server can do its job its good really good
         //now it will upload the image and its location
+
         $type = explode('.', $_FILES["image"]["name"]);
         $type = $type[count($type) - 1];
         $url = "" . $this->rand_code(5) . $this->rand_code(5) . '.' . $type;
         if (in_array($type, array("jpg", "jpeg", "gif", "png")))
             if (is_uploaded_file($_FILES["image"]["tmp_name"]))
-                if (move_uploaded_file($_FILES['image']["tmp_name"],"images/". $url)) {
+                if (move_uploaded_file($_FILES['image']["tmp_name"],$path. $url)) {
                     return $url;
                 } else {
                     return false;
                 }
     }
 	public function add_cat(){
+        $image_path = "../images/cats/";
     	$cat_name=$this->input->post('cat_name');
     	if (!isset($cat_name)){
     		$data['main_view']='add_cat';
@@ -131,7 +134,7 @@ class Welcome extends CI_Controller {
 
 		}else{
 
-			$data= array('name'=>$this->input->post('cat_name'),'img'=> $this->upload_image());
+			$data= array('name'=>$this->input->post('cat_name'),'img'=> $this->upload_image($image_path));
 
     		if ($this->main->cat_add($data)){
     			$this->session->set_flashdata('success','the category has been inserted successfully ');
@@ -156,14 +159,15 @@ class Welcome extends CI_Controller {
 		return $str;
 	}
 	public function add_slide(){
-		$slide_name=$this->input->post('slide_name');
+        $image_path = "../images/others/";
+        $slide_name=$this->input->post('slide_name');
 		if (!isset($slide_name)){
 			$data['main_view']='add_slide';
 			$this->load->view('main',$data);
 		}else{
 		    $slide_name = $this->input->post('slide_name');
 		    $slide_name = $slide_name.rand(5,150);
-			$data= array('var'=>$slide_name,'val1'=> $this->upload_image(),'val2'=>$this->input->post('slide_body'),
+			$data= array('var'=>$slide_name,'val1'=> $this->upload_image($image_path),'val2'=>$this->input->post('slide_body'),
               'link'=>$this->input->post('slide_link'),'type'=>$this->input->post('slide_type'));
 			if ($this->main->slide_add($data)){
 				$this->session->set_flashdata('success','the slide has been inserted successfully ');
@@ -218,6 +222,7 @@ class Welcome extends CI_Controller {
 		return $c;
 	}
 	public function edit($post_id){
+        $image_path = "../images/posts/";
         $input = $this->input->post('post_name');
         if (!isset($input)){
             $data['post_info']=$this->main->edit_post_get_info($post_id);
@@ -227,13 +232,13 @@ class Welcome extends CI_Controller {
         }
         else{
 			$path=$this->main->edit_post_get_info($post_id);
-			if (unlink('images/'.$path[0]->img)){
+			if (unlink('../images/posts/'.$path[0]->img)){
 				$this->session->set_flashdata('update_success','the image was also successfully deleted');
 			}
 			else{
 				$this->session->set_flashdata('update_failure','could not delete the image'.' '.base_url().'index.php/'.$path[0]->img.' probably image is not there');
 			}
-			$image=$this->upload_image();
+			$image=$this->upload_image($image_path);
 				$update=array(
 					'title'=>$this->input->post('post_name'),
 					'text'=>urlencode($this->input->post('post_body')),
