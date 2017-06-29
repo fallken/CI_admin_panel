@@ -2,9 +2,9 @@
 
 <form method="post" action="<?php echo base_url(); ?>index.php/welcome/add_slide" enctype="multipart/form-data">
 
-	<div class="col-md-2"></div>
+	<div class="col-md-1"></div>
 
-	<div class="col-md-4">
+	<div class="col-md-8">
         <div class="panel panel-default panel-table" style="margin-top: 90px;">
             <div class="panel-heading">
                 <h3 class="panel-title"><b>اضافه سازی اسلاید</b></h3>

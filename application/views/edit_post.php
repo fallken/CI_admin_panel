@@ -55,7 +55,7 @@
                         <?php
                         $image_address='images/'.$post_info[0]->img;
                         if(file_exists($image_address)){ ?>
-                        <img src="<?php echo base_url().'images/'.$post_info[0]->img?>" class="img-rounded" style="width:200px;height:150px;">
+                        <img src="<?php echo base_url().'../images/posts/'.$post_info[0]->img?>" class="img-rounded" style="width:200px;height:150px;">
                         <?php }else{ ?>
                             <img src="<?php echo base_url().'images/no-image-icon-11.PNG'?>" class="img-rounded" style="width:200px;height:150px;">
 
